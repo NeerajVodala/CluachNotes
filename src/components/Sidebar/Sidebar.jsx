@@ -66,10 +66,10 @@ export const Sidebar = () => {
           <div className="labels-add flex-row align-center text-center br-s">
             <input
               type="text"
-              placeholder="Enter label"
-              className="labels-add-input"
+              placeholder="Add label"
+              className="labels-add-input br-s"
             />
-            <i className="fas fa-plus-square fa-2x labels-add-btn"></i>
+            <i className="fas fa-plus-square fa-2x labels-add-btn br-s"></i>
           </div>
         </div>
       </nav>
