@@ -35,7 +35,8 @@
 .labels-add {
   position: relative;
   min-height: 1.75rem;
-  max-width: 80%;
+  max-width: 70%;
+  margin-left: 0.5rem;
   outline: 1px solid var(--span-1);
   background-color: var(--bg-secondary);
 }
