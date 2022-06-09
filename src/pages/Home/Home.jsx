@@ -1,5 +1,10 @@
+import { TextEditor } from "../../components";
 import "./Home.css";
 
 export const Home = () => {
-  return <>This is home</>;
+  return (
+    <>
+      <TextEditor />
+    </>
+  );
 };
