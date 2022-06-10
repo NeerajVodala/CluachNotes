@@ -8,7 +8,9 @@ function App() {
       <Navbar />
       <div className="main-template">
         <Sidebar />
-        <AppRoutes />
+        <div className="notes-section">
+          <AppRoutes />
+        </div>
       </div>
     </>
   );
