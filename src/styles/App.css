@@ -2,3 +2,7 @@
   display: flex;
   margin: 2rem 0;
 }
+
+.notes-section {
+  flex-basis: 80%;
+}
