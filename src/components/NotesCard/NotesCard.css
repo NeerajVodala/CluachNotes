@@ -1,12 +1,3 @@
-/* .note-editor {
-  height: fit-content;
-  max-width: 35rem;
-  padding: 1rem 1rem 0.5rem;
-  margin: 0 auto;
-  outline: 1px solid var(--span-1);
-  background-color: var(--bg-secondary);
-} */
-
 .note-card {
   height: fit-content;
   max-width: 20rem;
@@ -19,24 +10,12 @@
 }
 
 .note-card-title {
-  /* height: 2rem; */
   border: none;
   flex-grow: 1;
   border-bottom: 1px solid var(--span-2);
   outline: none;
-  color: var(--text-primary);
-  background-color: transparent;
 }
 
-.note-description {
-  resize: none;
-  font-family: inherit;
-  border: none;
-  outline: none;
-  color: var(--text-primary);
-  background-color: transparent;
-}
-
-.note-options {
+.note-card-footer {
   margin: 0.5rem 0 0;
 }

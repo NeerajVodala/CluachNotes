@@ -8,18 +8,18 @@ export const NotesCard = () => {
         <i className="fas fa-thumbtack"></i>
       </div>
 
-      <p className="note-description text-m">
+      <p className="note-card-description text-m">
         This is notes description This is notes description This is notes
-        description notes description This is notes description{" "}
+        description notes description This is notes description
       </p>
 
-      <div className="note-options flex-row justify-between">
-        <i className="fas fa-palette"></i>
-        <i className="fas fa-tags"></i>
-        <i className="fas fa-exclamation-circle"></i>
-        <i class="fas fa-edit"></i>
-        <i className="fas fa-file-archive"></i>
-        <i className="fas fa-trash"></i>
+      <div className="note-card-footer flex-row justify-between align-center">
+        <p className="text-span-1 text-s text-semibold">11/06/2022, 13:38:54</p>
+        <div className="flex-row justify-between gp-2xl">
+          <i class="fas fa-edit"></i>
+          <i className="fas fa-file-archive"></i>
+          <i className="fas fa-trash"></i>
+        </div>
       </div>
     </div>
   );
