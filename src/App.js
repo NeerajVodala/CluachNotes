@@ -6,12 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="main-template">
-        <Sidebar />
-        <div className="notes-section">
-          <AppRoutes />
-        </div>
-      </div>
+      <AppRoutes />
     </>
   );
 }
