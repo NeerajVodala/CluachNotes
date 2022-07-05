@@ -7,7 +7,7 @@ export const Navbar = () => {
         <div className="menu-icon">
           <i className="fas fa-bars fa-lg"></i>
         </div>
-        <Link to="/home">
+        <Link to="/">
           <div className="header-logo">
             <i className="fas fa-cogs fa-2x"></i>
             <h2>cluachNotes</h2>
