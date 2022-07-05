@@ -11,7 +11,7 @@ export const Sidebar = () => {
           </p>
           <ul>
             <li>
-              <NavLink to="/home" className="nav-link br-full">
+              <NavLink to="/" className="nav-link br-full">
                 <div className="flex-row align-center gp-m">
                   <i className="fas fa-home"></i> <span>Home</span>
                 </div>
