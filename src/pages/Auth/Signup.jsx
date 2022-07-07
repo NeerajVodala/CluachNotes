@@ -54,14 +54,14 @@ export const Signup = () => {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="password" className="label">
+            <label htmlFor="confirm-password" className="label">
               Confirm Password
             </label>
             <input
               type="password"
               placeholder="••••••••"
               className="input"
-              id="password"
+              id="confirm-password"
             />
           </div>
           <div>
@@ -72,7 +72,7 @@ export const Signup = () => {
             </label>
           </div>
           <button className="btn btn-m solid br-s">Create New Account</button>
-          <div className="text-center">
+          <div className="text-center text-underline">
             <Link to="/login">Already have an account</Link>
           </div>
         </div>
