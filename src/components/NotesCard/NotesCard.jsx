@@ -16,7 +16,7 @@ export const NotesCard = () => {
       <div className="note-card-footer flex-row justify-between align-center">
         <p className="text-span-1 text-s text-semibold">11/06/2022, 13:38:54</p>
         <div className="flex-row justify-between gp-2xl">
-          <i class="fas fa-edit"></i>
+          <i className="fas fa-edit"></i>
           <i className="fas fa-file-archive"></i>
           <i className="fas fa-trash"></i>
         </div>
