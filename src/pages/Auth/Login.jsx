@@ -37,13 +37,13 @@ export const Login = () => {
                 Remember me
               </label>
             </div>
-            <div className="text-m csr-pointer">
-              Guest Credentials
+            <div className="text-m text-underline csr-pointer">
+              Use Test Credentials
             </div>
           </div>
           <button className="btn btn-m solid br-s">Login</button>
-          <div className="text-center text-m text-underline">
-            <Link to="/signup">Create New Account</Link>
+          <div className="text-center text-m text-span-1 text-semibold">
+            <Link to="/signup">Create New Account </Link>
           </div>
         </div>
       </div>
