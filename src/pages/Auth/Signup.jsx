@@ -72,7 +72,7 @@ export const Signup = () => {
             </label>
           </div>
           <button className="btn btn-m solid br-s">Create New Account</button>
-          <div className="text-center text-underline">
+          <div className="text-center text-m text-span-1 text-underline text-semibold">
             <Link to="/login">Already have an account</Link>
           </div>
         </div>
