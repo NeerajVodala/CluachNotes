@@ -1,6 +1,6 @@
 .note-card {
   height: fit-content;
-  max-width: 20rem;
+  width: 20rem;
   white-space: pre-wrap;
   word-break: break-all;
   padding: 1rem 1rem 0.5rem;
