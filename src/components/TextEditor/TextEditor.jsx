@@ -7,14 +7,12 @@ export const TextEditor = () => {
         <input className="note-title text-l" type="text" placeholder="Title" />
         <i className="fas fa-thumbtack"></i>
       </div>
-
       <textarea
         className="note-description text-m"
         type="text"
         rows="3"
         placeholder="Take a note..."
       />
-
       <div className="flex-row justify-between align-center">
         <div className="note-features flex-row justify-between">
           <i className="fas fa-palette"></i>
