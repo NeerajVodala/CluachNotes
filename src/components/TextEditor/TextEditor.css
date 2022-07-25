@@ -1,6 +1,7 @@
 .note-editor {
   height: fit-content;
-  max-width: 35rem;
+  width: fit-content;
+  min-width: 35rem;
   padding: 1rem 1rem 0.5rem;
   margin: 0 auto;
   outline: 1px solid var(--span-1);
@@ -27,9 +28,41 @@
 }
 
 .note-features {
+  position: relative;
   width: 20%;
 }
 
 .note-confirm button {
   margin-left: 0.5rem;
+}
+
+.palette {
+  /* display: none; */
+  background-color: var(--bg-primary);
+  padding: 0.5rem;
+}
+
+.priorities {
+  /* display: none; */
+  background-color: var(--bg-primary);
+  padding: 0.5rem;
+}
+
+.priority {
+  background-color: var(--bg-secondary);
+  padding: 0.35rem;
+  height: 1.5rem;
+}
+
+.tags {
+  /* display: none; */
+  background-color: var(--bg-primary);
+  padding: 0.5rem;
+}
+
+.select-menu {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: none;
+  height: 1.5rem;
 }
