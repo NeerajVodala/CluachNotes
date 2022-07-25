@@ -13,14 +13,18 @@ export const Home = () => {
         <div>
           <p className="text-span-1 text-s text-semibold">PINNED</p>
           <div className="flex-row flex-wrap">
-            {notes.map((n) => {
-              return <NotesCard note={n} key={n.noteTitle} />;
-            })}
+            {notes.map((n) =>
+              n.isPinned ? <NotesCard Note={n} key={n.timeStamp} /> : <></>
+            )}
           </div>
         </div>
         <div>
           <p className="text-span-1 text-s text-semibold">OTHERS</p>
-          <div className="flex-row flex-wrap"></div>
+          <div className="flex-row flex-wrap">
+            {notes.map((n) =>
+              !n.isPinned ? <NotesCard Note={n} key={n.timeStamp} /> : <></>
+            )}
+          </div>
         </div>
       </div>
     </div>
