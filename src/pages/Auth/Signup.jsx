@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import "./Auth.css";
 
 export const Signup = () => {
+  const signupHandler = () => {};
+
   return (
-    <main className="auth-page flex-row align-center justify-center">
+    <form
+      className="auth-page flex-row align-center justify-center"
+      onSubmit={signupHandler}
+    >
       <div className="auth-container flex-row align-center justify-center shadow-1 br-s">
         <div className="input-section">
           <h3>Signup</h3>
@@ -64,19 +69,21 @@ export const Signup = () => {
               id="confirm-password"
             />
           </div>
-          <div>
+          <div className="flex-row align-center gp-s">
             <input type="checkbox" id="terms" />
             <label htmlFor="terms" className="label">
               {" "}
               I accept all Terms & Conditions
             </label>
           </div>
-          <button className="btn btn-m solid br-s">Create New Account</button>
+          <button className="btn btn-m solid br-s" type="submit">
+            Create New Account
+          </button>
           <div className="text-center text-m text-span-1 text-underline text-semibold">
             <Link to="/login">Already have an account</Link>
           </div>
         </div>
       </div>
-    </main>
+    </form>
   );
 };
