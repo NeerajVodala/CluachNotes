@@ -1,9 +1,23 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Auth.css";
 
 export const Signup = () => {
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const formHandler = (key, value) => {
+    setSignupData({ ...signupData, [key]: value });
+  };
+
   const signupHandler = (e) => {
     e.preventDefault();
+    console.log(signupData);
   };
 
   return (
@@ -24,6 +38,8 @@ export const Signup = () => {
                 placeholder="Enter first name"
                 className="input"
                 id="first-name"
+                value={signupData.firstName}
+                onChange={(e) => formHandler("firstName", e.target.value)}
                 required
               />
             </div>
@@ -36,6 +52,8 @@ export const Signup = () => {
                 placeholder="Enter last name"
                 className="input"
                 id="last-name"
+                value={signupData.lastName}
+                onChange={(e) => formHandler("lastName", e.target.value)}
                 required
               />
             </div>
@@ -49,6 +67,8 @@ export const Signup = () => {
               placeholder="email@example.com"
               className="input"
               id="email"
+              value={signupData.value}
+              onChange={(e) => formHandler("email", e.target.value)}
               required
             />
           </div>
@@ -61,6 +81,8 @@ export const Signup = () => {
               placeholder="••••••••"
               className="input"
               id="password"
+              value={signupData.password}
+              onChange={(e) => formHandler("password", e.target.value)}
               required
             />
           </div>
@@ -73,11 +95,13 @@ export const Signup = () => {
               placeholder="••••••••"
               className="input"
               id="confirm-password"
+              value={signupData.confirmPassword}
+              onChange={(e) => formHandler("confirmPassword", e.target.value)}
               required
             />
           </div>
           <div className="flex-row align-center gp-s">
-            <input type="checkbox" id="terms" />
+            <input type="checkbox" id="terms" required />
             <label htmlFor="terms" className="label">
               {" "}
               I accept all Terms & Conditions
