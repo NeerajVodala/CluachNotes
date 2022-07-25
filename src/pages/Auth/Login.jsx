@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./Auth.css";
 
 export const Login = () => {
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+
+  const formHandler = (key, value) => {
+    setLoginData({ ...loginData, [key]: value });
+  };
+
   const loginHandler = (e) => {
     e.preventDefault();
+    console.log(loginData);
   };
 
   return (
@@ -24,6 +32,8 @@ export const Login = () => {
               className="input"
               id="email"
               name="email"
+              value={loginData.email}
+              onChange={(e) => formHandler("email", e.target.value)}
               required
             />
           </div>
@@ -37,6 +47,8 @@ export const Login = () => {
               className="input"
               id="password"
               name="password"
+              value={loginData.password}
+              onChange={(e) => formHandler("password", e.target.value)}
               required
             />
           </div>
