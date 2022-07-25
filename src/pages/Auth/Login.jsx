@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import "./Auth.css";
 
 export const Login = () => {
-  const loginHandler = () => {};
+  const loginHandler = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <form
       className="auth-page flex-row align-center justify-center"
-      onSubmit={loginHandler}
+      onSubmit={(e) => loginHandler(e)}
     >
       <div className="auth-container flex-row align-center justify-center shadow-1 br-s">
         <div className="input-section">
@@ -22,6 +24,7 @@ export const Login = () => {
               className="input"
               id="email"
               name="email"
+              required
             />
           </div>
           <div className="input-container">
@@ -34,6 +37,7 @@ export const Login = () => {
               className="input"
               id="password"
               name="password"
+              required
             />
           </div>
           <div className="flex-row align-center justify-center gp-2xl">
