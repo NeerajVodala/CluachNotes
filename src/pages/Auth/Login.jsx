@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import "./Auth.css";
 
 export const Login = () => {
@@ -11,7 +12,14 @@ export const Login = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    console.log(loginData);
+    (async () => {
+      try {
+        const response = await axios.post(`/api/auth/login`, { ...loginData });
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   };
 
   return (
