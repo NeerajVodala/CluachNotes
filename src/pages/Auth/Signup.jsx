@@ -135,6 +135,11 @@ export const Signup = () => {
               </span>
             </span>
           </div>
+          {signupData.password !== signupData.confirmPassword && (
+            <p className="text-s text-span-1">
+              Password and Confirm password fields need to be same
+            </p>
+          )}
           <div className="flex-row align-center gp-s">
             <input type="checkbox" id="terms" required />
             <label htmlFor="terms" className="label">
