@@ -1,6 +1,6 @@
 import "./TextEditor.css";
 import { useNote } from "../../contexts";
-import { ColorPalette, Priority, Tags } from "../NoteFeatures";
+import { ColorPalette, Priority, Labels } from "../NoteFeatures";
 
 export const TextEditor = () => {
   const { notes, setNotes, note, setNote, initialNote } = useNote();
@@ -54,7 +54,7 @@ export const TextEditor = () => {
         <div className="note-features flex-row justify-between align-center gp-m">
           <ColorPalette />
           <Priority />
-          <Tags />
+          <Labels />
         </div>
         <div className="note-confirm text-right">
           <button

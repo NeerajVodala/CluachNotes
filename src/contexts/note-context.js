@@ -15,6 +15,8 @@ const NoteProvider = ({ children }) => {
   const [note, setNote] = useState(initialNote);
   const [notes, setNotes] = useState([]);
 
+  const [labels, setLabels] = useState(["Todo", "Work", "Chore", "Shopping"]);
+
   return (
     <NoteContext.Provider
       value={{
@@ -23,6 +25,8 @@ const NoteProvider = ({ children }) => {
         note,
         setNote,
         initialNote,
+        labels,
+        setLabels,
       }}
     >
       {children}

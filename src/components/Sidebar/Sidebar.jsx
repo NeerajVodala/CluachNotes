@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNote } from "../../contexts";
 import "./Sidebar.css";
 
 export const Sidebar = () => {
+  const { labels, setLabels } = useNote();
+  const [labelText, setLabelText] = useState("");
+  const labelsHandler = (e) => {
+    e.preventDefault();
+    setLabels([...labels, labelText]);
+    setLabelText("");
+  };
   return (
     <aside className="sidebar">
       <nav>
@@ -37,40 +46,36 @@ export const Sidebar = () => {
         <div>
           <p className="text-span-1 text-s text-semibold nav-heading">LABELS</p>
           <ul>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Todo</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Work</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Chore</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Shopping</span>
-              </div>
-            </li>
+            {labels.map((l) => {
+              return (
+                <li className="nav-link labels br-full" key={l}>
+                  <div className="br-full flex-row align-center gp-m">
+                    <i className="fas fa-tag"></i>
+                    <span>{l}</span>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
-          <div className="labels-add flex-row align-center text-center br-s">
+          <form
+            className="labels-add flex-row align-center text-center br-s"
+            onSubmit={(e) => labelsHandler(e)}
+          >
             <input
               type="text"
               placeholder="Add label"
               className="labels-add-input br-s"
+              value={labelText}
+              onChange={(e) => setLabelText(e.target.value)}
+              required
             />
-            <i className="fas fa-plus-square fa-2x labels-add-btn br-s"></i>
-          </div>
+            <button type="submit" className="br-s labels-add-btn">
+              <div style={{ fontSize: "1rem" }}>
+                <i className="fas fa-plus-square fa-2x br-s labels-add-icon"></i>
+              </div>
+            </button>
+          </form>
         </div>
       </nav>
     </aside>
