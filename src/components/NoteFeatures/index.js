@@ -1,3 +1,3 @@
 export { ColorPalette } from "./ColorPalette";
-export { Tags } from "./Tags";
+export { Labels } from "./Labels";
 export { Priority } from "./Priority";
