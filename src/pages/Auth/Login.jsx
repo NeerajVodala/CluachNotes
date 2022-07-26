@@ -88,7 +88,15 @@ export const Login = () => {
                 Remember me
               </label>
             </div>
-            <div className="text-m text-underline csr-pointer">
+            <div
+              className="text-m text-underline csr-pointer"
+              onClick={() =>
+                setLoginData({
+                  email: "user@credentials.test",
+                  password: "testpass123",
+                })
+              }
+            >
               Use Test Credentials
             </div>
           </div>
