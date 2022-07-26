@@ -2,6 +2,10 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 export const Sidebar = () => {
+  const labelsHandler = (e) => {
+    e.preventDefault();
+    console.log("Yesss");
+  };
   return (
     <aside className="sidebar">
       <nav>
@@ -63,14 +67,22 @@ export const Sidebar = () => {
             </li>
           </ul>
 
-          <div className="labels-add flex-row align-center text-center br-s">
+          <form
+            className="labels-add flex-row align-center text-center br-s"
+            onSubmit={(e) => labelsHandler(e)}
+          >
             <input
               type="text"
               placeholder="Add label"
               className="labels-add-input br-s"
+              required
             />
-            <i className="fas fa-plus-square fa-2x labels-add-btn br-s"></i>
-          </div>
+            <button type="submit" className="br-s labels-add-btn">
+              <div style={{ fontSize: "1rem" }}>
+                <i className="fas fa-plus-square fa-2x br-s labels-add-icon"></i>
+              </div>
+            </button>
+          </form>
         </div>
       </nav>
     </aside>
