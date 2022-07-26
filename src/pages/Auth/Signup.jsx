@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
 export const Signup = () => {
+  const navigate = useNavigate();
+
   const [signupData, setSignupData] = useState({
     firstName: "",
     lastName: "",
@@ -23,7 +25,10 @@ export const Signup = () => {
         const response = await axios.post(`/api/auth/signup`, {
           ...signupData,
         });
-        console.log(response);
+
+        if (response.status === 201) {
+          navigate("/login");
+        }
       } catch (error) {
         console.error(error);
       }

@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./Auth.css";
+import { useAuth } from "../../contexts";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const { authState, setAuthState } = useAuth();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
 
   const formHandler = (key, value) => {
@@ -15,9 +18,26 @@ export const Login = () => {
     (async () => {
       try {
         const response = await axios.post(`/api/auth/login`, { ...loginData });
-        console.log(response);
+        const {
+          data: { foundUser, encodedToken },
+          status,
+        } = response;
+
+        if (status === 200) {
+          localStorage.setItem("token", encodedToken);
+          localStorage.setItem("user", JSON.stringify(foundUser));
+          setAuthState({
+            ...authState,
+            isLoggedIn: true,
+            token: encodedToken,
+            user: foundUser,
+          });
+        }
+        navigate("/");
       } catch (error) {
-        console.error(error);
+        if (error.response.status === 401) alert("Incorrect password");
+        else if (error.response.status === 404) alert("Invalid credentials");
+        else console.error(error.response);
       }
     })();
   };
