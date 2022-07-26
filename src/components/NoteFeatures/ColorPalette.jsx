@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { useNote } from "../../contexts/note-context";
+import { useNote } from "../../contexts";
 
 export const ColorPalette = () => {
   const { note, setNote } = useNote();
