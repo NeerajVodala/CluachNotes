@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { NoteProvider } from "./contexts/note-context";
+import { NoteProvider, AuthProvider } from "./contexts";
 import { makeServer } from "./server";
 
 // Call make Server
@@ -13,9 +13,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NoteProvider>
-        <App />
-      </NoteProvider>
+      <AuthProvider>
+        <NoteProvider>
+          <App />
+        </NoteProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,7 +1,7 @@
 import { NotesCard, TextEditor, Sidebar } from "../../components";
 import "./Home.css";
 import "../../styles/App.css";
-import { useNote } from "../../contexts/note-context";
+import { useNote } from "../../contexts";
 
 export const Home = () => {
   const { notes } = useNote();

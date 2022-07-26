@@ -1,5 +1,5 @@
 import "./TextEditor.css";
-import { useNote } from "../../contexts/note-context";
+import { useNote } from "../../contexts";
 import { ColorPalette, Priority, Tags } from "../NoteFeatures";
 
 export const TextEditor = () => {
