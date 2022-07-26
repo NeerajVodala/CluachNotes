@@ -8,6 +8,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [showPass, setShowPass] = useState(false);
 
   const formHandler = (key, value) => {
     setLoginData({ ...loginData, [key]: value });
@@ -69,16 +70,25 @@ export const Login = () => {
             <label htmlFor="password" className="label">
               Password
             </label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              className="input"
-              id="password"
-              name="password"
-              value={loginData.password}
-              onChange={(e) => formHandler("password", e.target.value)}
-              required
-            />
+            <span className="password-container">
+              <input
+                type={showPass ? "text" : "password"}
+                placeholder="••••••••"
+                className="input password-input"
+                id="password"
+                name="password"
+                value={loginData.password}
+                onChange={(e) => formHandler("password", e.target.value)}
+                required
+              />
+              <span onClick={() => setShowPass((prev) => !prev)}>
+                {showPass ? (
+                  <i className="far fa-eye-slash fa-xs eye-icon"></i>
+                ) : (
+                  <i className="far fa-eye fa-xs eye-icon"></i>
+                )}
+              </span>
+            </span>
           </div>
           <div className="flex-row align-center justify-center gp-2xl">
             <div className="flex-row align-center gp-s">

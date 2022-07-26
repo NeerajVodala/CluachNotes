@@ -6,3 +6,16 @@
   padding: 2rem 4rem;
   margin: 2rem;
 }
+
+.password-container {
+  position: relative;
+}
+.password-input {
+  width: 100%;
+}
+.eye-icon {
+  position: absolute;
+  right: 5%;
+  top: 35%;
+  cursor: pointer;
+}
