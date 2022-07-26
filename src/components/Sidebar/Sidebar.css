@@ -43,7 +43,7 @@
 
 .labels-add-input {
   min-height: 100%;
-  min-width: 90%;
+  width: 80%;
   padding-left: 0.5rem;
   outline: none;
   border: none;
@@ -52,7 +52,16 @@
 }
 
 .labels-add-btn {
+  height: 1.75rem;
+  width: 20%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.labels-add-icon {
   position: absolute;
+  top: -2px;
   right: 0;
   color: var(--span-1);
   cursor: pointer;
