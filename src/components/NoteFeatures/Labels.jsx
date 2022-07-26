@@ -1,14 +1,7 @@
-import { v4 as uuid } from "uuid";
 import { useNote } from "../../contexts";
 
-export const Tags = () => {
-  const { note, setNote } = useNote();
-  const tagsList = [
-    { id: uuid(), value: "Todo" },
-    { id: uuid(), value: "Work" },
-    { id: uuid(), value: "Chore" },
-    { id: uuid(), value: "Shopping" },
-  ];
+export const Labels = () => {
+  const { note, setNote, labels } = useNote();
 
   return (
     <div className="flex-row align-center gp-s br-full tags">
@@ -23,8 +16,8 @@ export const Tags = () => {
           onChange={(e) => setNote({ ...note, label: e.target.value })}
         >
           <option>Select</option>
-          {tagsList.map((tag) => (
-            <option key={tag.id}>{tag.value}</option>
+          {labels.map((l) => (
+            <option key={l}>{l}</option>
           ))}
         </select>
       </div>
