@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNote } from "../../contexts";
 import "./Sidebar.css";
 
 export const Sidebar = () => {
+  const { labels, setLabels } = useNote();
+  const [labelText, setLabelText] = useState("");
   const labelsHandler = (e) => {
     e.preventDefault();
-    console.log("Yesss");
+    setLabels([...labels, labelText]);
+    setLabelText("");
   };
   return (
     <aside className="sidebar">
@@ -41,30 +46,16 @@ export const Sidebar = () => {
         <div>
           <p className="text-span-1 text-s text-semibold nav-heading">LABELS</p>
           <ul>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Todo</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Work</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Chore</span>
-              </div>
-            </li>
-            <li className="nav-link labels br-full">
-              <div className="br-full flex-row align-center gp-m">
-                <i className="fas fa-tag"></i>
-                <span>Shopping</span>
-              </div>
-            </li>
+            {labels.map((l) => {
+              return (
+                <li className="nav-link labels br-full" key={l}>
+                  <div className="br-full flex-row align-center gp-m">
+                    <i className="fas fa-tag"></i>
+                    <span>{l}</span>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
           <form
@@ -75,6 +66,8 @@ export const Sidebar = () => {
               type="text"
               placeholder="Add label"
               className="labels-add-input br-s"
+              value={labelText}
+              onChange={(e) => setLabelText(e.target.value)}
               required
             />
             <button type="submit" className="br-s labels-add-btn">
