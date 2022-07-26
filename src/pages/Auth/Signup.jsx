@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Auth.css";
 
 export const Signup = () => {
@@ -17,7 +18,16 @@ export const Signup = () => {
 
   const signupHandler = (e) => {
     e.preventDefault();
-    console.log(signupData);
+    (async () => {
+      try {
+        const response = await axios.post(`/api/auth/signup`, {
+          ...signupData,
+        });
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   };
 
   return (
