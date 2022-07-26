@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../contexts";
 
 export const Navbar = () => {
+  const {
+    authState: { isLoggedIn },
+    setAuthState,
+  } = useAuth();
+
+  const { pathname } = useLocation();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setAuthState({ isLoggedIn: false, token: null, user: null });
+  };
+
   return (
     <header className="header">
       <div className="header-logo-section">
@@ -19,9 +33,24 @@ export const Navbar = () => {
         <div id="mode-switch">
           <i className="fas fa-sun fa-lg"></i>
         </div>
-        <Link to="/login" className="btn outline btn-m br-full">
-          Login
-        </Link>
+
+        {isLoggedIn ? (
+          <Link
+            to="/login"
+            className="btn outline btn-m br-full"
+            onClick={logoutHandler}
+          >
+            Logout
+          </Link>
+        ) : pathname === "/login" ? (
+          <Link to="/signup" className="btn outline btn-m br-full">
+            Signup
+          </Link>
+        ) : (
+          <Link to="/login" className="btn outline btn-m br-full">
+            Login
+          </Link>
+        )}
       </div>
     </header>
   );
