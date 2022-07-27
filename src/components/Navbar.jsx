@@ -18,7 +18,6 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log("render");
     if (lightMode) {
       localStorage.setItem("lightmode", null);
       document.body.classList.remove("light-mode");
