@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts";
 
@@ -6,8 +7,25 @@ export const Navbar = () => {
     authState: { isLoggedIn },
     setAuthState,
   } = useAuth();
-
   const { pathname } = useLocation();
+
+  const [lightMode, setLightMode] = useState(
+    localStorage.getItem("lightmode") === "enabled" ? false : true
+  );
+
+  const modeToggle = () => {
+    setLightMode((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (lightMode) {
+      localStorage.setItem("lightmode", null);
+      document.body.classList.remove("light-mode");
+    } else {
+      localStorage.setItem("lightmode", "enabled");
+      document.body.classList.add("light-mode");
+    }
+  }, [lightMode]);
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
@@ -30,8 +48,12 @@ export const Navbar = () => {
       </div>
 
       <div className="header-nav">
-        <div id="mode-switch">
-          <i className="fas fa-sun fa-lg"></i>
+        <div id="mode-switch" onClick={modeToggle}>
+          {lightMode ? (
+            <i className="fas fa-sun fa-lg"></i>
+          ) : (
+            <i className="fas fa-moon fa-lg"></i>
+          )}
         </div>
 
         {isLoggedIn ? (
