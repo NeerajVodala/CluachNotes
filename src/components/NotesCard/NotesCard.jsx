@@ -31,7 +31,18 @@ export const NotesCard = ({ Note }) => {
     })();
   };
   const trashNote = () => {
-    console.log("trashed");
+    (async () => {
+      try {
+        const { status, data } = await axios.delete(`/api/notes/${Note._id}`, {
+          headers: { authorization: localStorage.getItem("token") },
+        });
+        if (status === 200) {
+          notesDispatch({ type: "TRASH_NOTE", payload: { data, Note } });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   };
 
   return (

@@ -17,6 +17,12 @@ const notesReducer = (prevState, { type, payload }) => {
         notesList: payload.notes,
         archivedList: payload.archives,
       };
+    case "TRASH_NOTE":
+      return {
+        ...prevState,
+        noteList: payload.data.notes,
+        trashedList: [...prevState.trashedList, payload.Note],
+      };
     default:
       return { ...prevState };
   }
