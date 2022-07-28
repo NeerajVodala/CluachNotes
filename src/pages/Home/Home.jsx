@@ -5,7 +5,7 @@ import { useNote } from "../../contexts";
 
 export const Home = () => {
   const { notesState } = useNote();
-  
+
   return (
     <div className="main">
       <Sidebar />
