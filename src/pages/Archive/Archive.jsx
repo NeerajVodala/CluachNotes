@@ -10,7 +10,7 @@ export const Archive = () => {
       <Sidebar />
       {notesState.archivedList.length > 0 ? (
         notesState.archivedList?.map((a) => {
-          return <NotesCard Note={a} key={a._d} />;
+          return <NotesCard Note={a} key={a._id} />;
         })
       ) : (
         <div className="archive flex-col justify-center align-center gp-2xl text-center">
