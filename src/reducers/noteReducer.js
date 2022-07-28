@@ -11,6 +11,12 @@ const notesReducer = (prevState, { type, payload }) => {
       return { ...prevState, noteList: payload };
     case "UPDATE_NOTE":
       return { ...prevState, noteList: payload };
+    case "ARCHIVE_NOTE":
+      return {
+        ...prevState,
+        notesList: payload.notes,
+        archivedList: payload.archives,
+      };
     default:
       return { ...prevState };
   }

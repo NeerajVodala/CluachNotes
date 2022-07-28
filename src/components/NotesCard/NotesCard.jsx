@@ -1,6 +1,39 @@
+import { useNote } from "../../contexts";
+import axios from "axios";
 import "./NotesCard.css";
 
 export const NotesCard = ({ Note }) => {
+  const { setNote, notesDispatch } = useNote();
+  const editNote = () => {
+    setNote({
+      ...Note,
+      isEdited: (Note.isEdited = true),
+      timeStamp: new Date().toLocaleString(),
+    });
+  };
+
+  const archiveNote = () => {
+    (async () => {
+      try {
+        const { status, data } = await axios.post(
+          `/api/notes/archives/${Note._id}`,
+          {
+            Note,
+          },
+          { headers: { authorization: localStorage.getItem("token") } }
+        );
+        if (status === 201) {
+          notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  };
+  const trashNote = () => {
+    console.log("trashed");
+  };
+
   return (
     <div
       className="note-card flex-col gp-m br-s"
@@ -38,9 +71,15 @@ export const NotesCard = ({ Note }) => {
       <div className="note-card-footer flex-row justify-between align-center">
         <p className="text-s text-semibold">{Note.timeStamp}</p>
         <div className="flex-row justify-between gp-2xl">
-          <i className="fas fa-edit"></i>
-          <i className="fas fa-file-archive"></i>
-          <i className="fas fa-trash"></i>
+          <span onClick={editNote}>
+            <i className="fas fa-edit"></i>
+          </span>
+          <span onClick={archiveNote}>
+            <i className="fas fa-file-archive"></i>
+          </span>
+          <span onClick={trashNote}>
+            <i className="fas fa-trash"></i>
+          </span>
         </div>
       </div>
     </div>
