@@ -143,7 +143,6 @@ export const Signup = () => {
           <div className="flex-row align-center gp-s">
             <input type="checkbox" id="terms" required />
             <label htmlFor="terms" className="label">
-              {" "}
               I accept all Terms & Conditions
             </label>
           </div>

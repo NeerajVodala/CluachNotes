@@ -94,7 +94,6 @@ export const Login = () => {
             <div className="flex-row align-center gp-s">
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me" className="label text-s">
-                {" "}
                 Remember me
               </label>
             </div>
