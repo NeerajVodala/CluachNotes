@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Archive, Trash, Login, Signup } from "../pages";
 import { RequiresAuth } from "../pages/Auth/RequiresAuth";
+import { MockmanPage } from "../pages/Mockman";
 
 export const AppRoutes = () => {
   return (
@@ -40,6 +41,7 @@ export const AppRoutes = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/mockman" element={<MockmanPage />} />
       </Routes>
     </>
   );
