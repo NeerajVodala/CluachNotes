@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
+import { initialState, notesReducer } from "../reducers/noteReducer";
 
 const NoteContext = createContext();
 const useNote = () => useContext(NoteContext);
@@ -8,25 +9,26 @@ const NoteProvider = ({ children }) => {
     description: "",
     color: "var(--bg-secondary)",
     priority: "",
-    isPinned: false,
-    timeStamp: new Date().toLocaleString(),
     label: "",
+    isPinned: false,
+    isEdited: false,
+    timeStamp: new Date().toLocaleString(),
   };
   const [note, setNote] = useState(initialNote);
-  const [notes, setNotes] = useState([]);
+  const [notesState, notesDispatch] = useReducer(notesReducer, initialState);
 
   const [labels, setLabels] = useState(["Todo", "Work", "Chore", "Shopping"]);
 
   return (
     <NoteContext.Provider
       value={{
-        notes,
-        setNotes,
         note,
         setNote,
         initialNote,
         labels,
         setLabels,
+        notesState,
+        notesDispatch,
       }}
     >
       {children}
