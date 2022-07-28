@@ -1,18 +1,51 @@
 import "./TextEditor.css";
 import { useNote } from "../../contexts";
 import { ColorPalette, Priority, Labels } from "../NoteFeatures";
+import axios from "axios";
 
 export const TextEditor = () => {
-  const { notes, setNotes, note, setNote, initialNote } = useNote();
+  const { note, setNote, initialNote, notesDispatch } = useNote();
 
   const clearHandler = (e) => {
     e.preventDefault();
     setNote(initialNote);
   };
 
+  const addNote = async () => {
+    try {
+      const response = await axios.post(
+        "/api/notes",
+        { note },
+        { headers: { authorization: localStorage.getItem("token") } }
+      );
+      const { status, data } = response;
+      if (status === 201) {
+        notesDispatch({ type: "ADD_NOTE", payload: data.notes });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateNote = async () => {
+    try {
+      const response = await axios.post(
+        `/api/notes/${note._id}`,
+        { note },
+        { headers: { authorization: localStorage.getItem("token") } }
+      );
+      const { status, data } = response;
+      if (status === 201) {
+        notesDispatch({ type: "UPDATE_NOTE", payload: data.notes });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const saveHandler = (e) => {
     e.preventDefault();
-    setNotes([...notes, note]);
+    note.isEdited ? updateNote() : addNote();
     setNote(initialNote);
   };
 
