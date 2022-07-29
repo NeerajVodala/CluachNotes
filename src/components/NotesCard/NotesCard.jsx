@@ -83,6 +83,25 @@ export const NotesCard = ({ Note, pathname }) => {
     })();
   };
 
+  const unTrashNote = async () => {
+    try {
+      const response = await axios.post(
+        "/api/notes",
+        { note: Note },
+        {
+          headers: { authorization: localStorage.getItem("token") },
+        }
+      );
+      const { status, data } = response;
+      if (status === 201) {
+        notesDispatch({ type: "ADD_NOTE", payload: data.notes });
+        notesDispatch({ type: "DELETE_NOTE", payload: Note });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div
       className="note-card flex-col gp-m br-s"
@@ -148,11 +167,7 @@ export const NotesCard = ({ Note, pathname }) => {
             </span>
           )}
           {pathname === "/trash" && (
-            <span
-              onClick={() =>
-                notesDispatch({ type: "UNTRASH_NOTE", payload: Note })
-              }
-            >
+            <span onClick={unTrashNote}>
               <i className="fas fa-trash-restore"></i>
             </span>
           )}

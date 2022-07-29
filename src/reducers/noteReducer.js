@@ -25,12 +25,6 @@ const notesReducer = (prevState, { type, payload }) => {
         noteList: payload.data.notes,
         trashedList: [...prevState.trashedList, payload.Note],
       };
-    case "UNTRASH_NOTE":
-      return {
-        ...prevState,
-        noteList: [...prevState.noteList, payload],
-        trashedList: prevState.trashedList.filter((n) => n._id !== payload._id),
-      };
     case "DELETE_NOTE":
       return {
         ...prevState,
