@@ -23,7 +23,7 @@ export const NotesCard = ({ Note, pathname }) => {
 
   useEffect(() => {
     updateNote(pinNote, notesDispatch);
-  }, [pinNote]);
+  }, [pinNote, notesDispatch]);
 
   const pinHandler = () => {
     setPinNote({ ...Note, isPinned: !Note.isPinned });
