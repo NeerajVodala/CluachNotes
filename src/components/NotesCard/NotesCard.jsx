@@ -1,9 +1,18 @@
 import { useNote } from "../../contexts";
-import axios from "axios";
 import "./NotesCard.css";
+import { useEffect, useState } from "react";
+import {
+  archiveNote,
+  deleteArchivedNote,
+  trashNote,
+  unArchiveNote,
+  unTrashNote,
+  updateNote,
+} from "../../utils";
 
 export const NotesCard = ({ Note, pathname }) => {
   const { setNote, notesDispatch } = useNote();
+  const [pinNote, setPinNote] = useState({});
   const editNote = () => {
     setNote({
       ...Note,
@@ -12,86 +21,12 @@ export const NotesCard = ({ Note, pathname }) => {
     });
   };
 
-  const archiveNote = async () => {
-    try {
-      const { status, data } = await axios.post(
-        `/api/notes/archives/${Note._id}`,
-        {
-          Note,
-        },
-        { headers: { authorization: localStorage.getItem("token") } }
-      );
-      if (status === 201) {
-        notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  useEffect(() => {
+    updateNote(pinNote, notesDispatch);
+  }, [pinNote]);
 
-  const unArchiveNote = async () => {
-    try {
-      const { status, data } = await axios.post(
-        `/api/archives/restore/${Note._id}`,
-        {},
-        {
-          headers: { authorization: localStorage.getItem("token") },
-        }
-      );
-      if (status === 200) {
-        notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const deleteArchivedNote = async () => {
-    try {
-      const { status, data } = await axios.delete(
-        `/api/archives/delete/${Note._id}`,
-        {
-          headers: { authorization: localStorage.getItem("token") },
-        }
-      );
-      if (status === 200) {
-        notesDispatch({ type: "DELETE_ARCHIVE", payload: data.archives });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const trashNote = async () => {
-    try {
-      const { status, data } = await axios.delete(`/api/notes/${Note._id}`, {
-        headers: { authorization: localStorage.getItem("token") },
-      });
-      if (status === 200) {
-        notesDispatch({ type: "TRASH_NOTE", payload: { data, Note } });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const unTrashNote = async () => {
-    try {
-      const response = await axios.post(
-        "/api/notes",
-        { note: Note },
-        {
-          headers: { authorization: localStorage.getItem("token") },
-        }
-      );
-      const { status, data } = response;
-      if (status === 201) {
-        notesDispatch({ type: "ADD_NOTE", payload: data.notes });
-        notesDispatch({ type: "DELETE_NOTE", payload: Note });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const pinHandler = () => {
+    setPinNote({ ...Note, isPinned: !Note.isPinned });
   };
 
   return (
@@ -109,10 +44,12 @@ export const NotesCard = ({ Note, pathname }) => {
       <div className="flex-row justify-between align-center gp-s">
         <h4 className="note-card-title">{Note.title}</h4>
         {pathname === "/" && (
-          <i
-            className="fas fa-thumbtack"
-            style={Note.isPinned ? { color: "#E53E3E" } : {}}
-          ></i>
+          <span onClick={pinHandler}>
+            <i
+              className="fas fa-thumbtack"
+              style={Note.isPinned ? { color: "#E53E3E" } : {}}
+            ></i>
+          </span>
         )}
       </div>
 
@@ -132,38 +69,36 @@ export const NotesCard = ({ Note, pathname }) => {
 
       <div className="note-card-footer flex-row justify-between align-center">
         <p className="text-s text-semibold">{Note.timeStamp}</p>
-        <div className="flex-row justify-between gp-2xl">
-          {pathname === "/" && (
+        {pathname === "/" && (
+          <div className="flex-row justify-between gp-2xl">
             <span onClick={editNote}>
               <i className="fas fa-edit"></i>
             </span>
-          )}
-          {pathname === "/" && (
-            <span onClick={archiveNote}>
+
+            <span onClick={() => archiveNote(Note, notesDispatch)}>
               <i className="fas fa-file-archive"></i>
             </span>
-          )}
-          {pathname === "/" && (
-            <span onClick={trashNote}>
+
+            <span onClick={() => trashNote(Note, notesDispatch)}>
               <i className="fas fa-trash"></i>
             </span>
-          )}
-          {pathname === "/archive" && (
-            <span onClick={unArchiveNote}>
+          </div>
+        )}
+        {pathname === "/archive" && (
+          <div className="flex-row justify-between gp-2xl">
+            <span onClick={() => unArchiveNote(Note, notesDispatch)}>
               <i className="far fa-file-archive"></i>
             </span>
-          )}
-          {pathname === "/archive" && (
-            <span onClick={deleteArchivedNote}>
+            <span onClick={() => deleteArchivedNote(Note, notesDispatch)}>
               <i className="fas fa-trash"></i>
             </span>
-          )}
-          {pathname === "/trash" && (
-            <span onClick={unTrashNote}>
+          </div>
+        )}
+        {pathname === "/trash" && (
+          <div className="flex-row justify-between gp-2xl">
+            <span onClick={() => unTrashNote(Note, notesDispatch)}>
               <i className="fas fa-trash-restore"></i>
             </span>
-          )}
-          {pathname === "/trash" && (
             <span
               onClick={() =>
                 notesDispatch({ type: "DELETE_NOTE", payload: Note })
@@ -171,8 +106,8 @@ export const NotesCard = ({ Note, pathname }) => {
             >
               <i className="fas fa-trash"></i>
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
