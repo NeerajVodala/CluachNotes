@@ -2,16 +2,18 @@ import "./Archive.css";
 import "../../styles/App.css";
 import { NotesCard, Sidebar } from "../../components";
 import { useNote } from "../../contexts";
+import { useLocation } from "react-router-dom";
 
 export const Archive = () => {
   const { notesState } = useNote();
+  const { pathname } = useLocation();
   return (
     <div className="main">
       <Sidebar />
       {notesState.archivedList.length > 0 ? (
         <div className="flex-row flex-wrap">
           {notesState.archivedList?.map((a) => {
-            return <NotesCard Note={a} key={a._id} />;
+            return <NotesCard Note={a} pathname={pathname} key={a._id} />;
           })}
         </div>
       ) : (

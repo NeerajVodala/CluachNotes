@@ -2,9 +2,11 @@ import { NotesCard, Sidebar } from "../../components";
 import "./Trash.css";
 import "../../styles/App.css";
 import { useNote } from "../../contexts";
+import { useLocation } from "react-router-dom";
 
 export const Trash = () => {
   const { notesState } = useNote();
+  const { pathname } = useLocation();
   return (
     <div className="main">
       <Sidebar />
@@ -12,7 +14,7 @@ export const Trash = () => {
       {notesState.trashedList.length > 0 ? (
         <div className="flex-row flex-wrap">
           {notesState.trashedList?.map((t) => {
-            return <NotesCard Note={t} key={t._id} />;
+            return <NotesCard Note={t} pathname={pathname} key={t._id} />;
           })}
         </div>
       ) : (
