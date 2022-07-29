@@ -2,7 +2,7 @@ import { useNote } from "../../contexts";
 import axios from "axios";
 import "./NotesCard.css";
 
-export const NotesCard = ({ Note }) => {
+export const NotesCard = ({ Note, pathname }) => {
   const { setNote, notesDispatch } = useNote();
   const editNote = () => {
     setNote({
@@ -30,6 +30,44 @@ export const NotesCard = ({ Note }) => {
       }
     })();
   };
+
+  const unArchiveNote = () => {
+    (async () => {
+      try {
+        const { status, data } = await axios.post(
+          `/api/archives/restore/${Note._id}`,
+          {},
+          {
+            headers: { authorization: localStorage.getItem("token") },
+          }
+        );
+        if (status === 200) {
+          notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  };
+
+  const deleteArchivedNote = () => {
+    (async () => {
+      try {
+        const { status, data } = await axios.delete(
+          `/api/archives/delete/${Note._id}`,
+          {
+            headers: { authorization: localStorage.getItem("token") },
+          }
+        );
+        if (status === 200) {
+          notesDispatch({ type: "DELETE_ARCHIVE", payload: data.archives });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  };
+
   const trashNote = () => {
     (async () => {
       try {
@@ -59,10 +97,12 @@ export const NotesCard = ({ Note }) => {
     >
       <div className="flex-row justify-between align-center gp-s">
         <h4 className="note-card-title">{Note.title}</h4>
-        <i
-          className="fas fa-thumbtack"
-          style={Note.isPinned ? { color: "#E53E3E" } : {}}
-        ></i>
+        {pathname === "/" && (
+          <i
+            className="fas fa-thumbtack"
+            style={Note.isPinned ? { color: "#E53E3E" } : {}}
+          ></i>
+        )}
       </div>
 
       <p className="note-card-description text-m">{Note.description}</p>
@@ -82,15 +122,49 @@ export const NotesCard = ({ Note }) => {
       <div className="note-card-footer flex-row justify-between align-center">
         <p className="text-s text-semibold">{Note.timeStamp}</p>
         <div className="flex-row justify-between gp-2xl">
-          <span onClick={editNote}>
-            <i className="fas fa-edit"></i>
-          </span>
-          <span onClick={archiveNote}>
-            <i className="fas fa-file-archive"></i>
-          </span>
-          <span onClick={trashNote}>
-            <i className="fas fa-trash"></i>
-          </span>
+          {pathname === "/" && (
+            <span onClick={editNote}>
+              <i className="fas fa-edit"></i>
+            </span>
+          )}
+          {pathname === "/" && (
+            <span onClick={archiveNote}>
+              <i className="fas fa-file-archive"></i>
+            </span>
+          )}
+          {pathname === "/" && (
+            <span onClick={trashNote}>
+              <i className="fas fa-trash"></i>
+            </span>
+          )}
+          {pathname === "/archive" && (
+            <span onClick={unArchiveNote}>
+              <i className="far fa-file-archive"></i>
+            </span>
+          )}
+          {pathname === "/archive" && (
+            <span onClick={deleteArchivedNote}>
+              <i className="fas fa-trash"></i>
+            </span>
+          )}
+          {pathname === "/trash" && (
+            <span
+              onClick={() =>
+                notesDispatch({ type: "UNTRASH_NOTE", payload: Note })
+              }
+            >
+              <i className="fas fa-trash-restore"></i>
+            </span>
+          )}
+          {pathname === "/trash" && (
+            <span
+              onClick={() =>
+                notesDispatch({ type: "DELETE_NOTE", payload: Note })
+              }
+            >
+              <i className="fas fa-trash"></i>
+            </span>
+          )}
         </div>
       </div>
     </div>
