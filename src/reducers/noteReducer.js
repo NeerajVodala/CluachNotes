@@ -30,19 +30,6 @@ const notesReducer = (prevState, { type, payload }) => {
         ...prevState,
         trashedList: prevState.trashedList.filter((n) => n._id !== payload._id),
       };
-    case "PIN_NOTE":
-      return {
-        ...prevState,
-        pinnedList: [
-          ...prevState.pinnedList,
-          { ...payload, isPinned: !payload.isPinned },
-        ],
-      };
-    case "UNPIN_NOTE":
-      return {
-        ...prevState,
-        pinnedList: prevState.pinnedList.filter((p) => p._id !== payload._id),
-      };
     default:
       return { ...prevState };
   }
