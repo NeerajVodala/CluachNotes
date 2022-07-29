@@ -10,9 +10,11 @@ export const Trash = () => {
       <Sidebar />
 
       {notesState.trashedList.length > 0 ? (
-        notesState.trashedList?.map((t) => {
-          return <NotesCard Note={t} key={t._id} />;
-        })
+        <div className="flex-row flex-wrap">
+          {notesState.trashedList?.map((t) => {
+            return <NotesCard Note={t} key={t._id} />;
+          })}
+        </div>
       ) : (
         <div className="trash flex-col justify-center align-center gp-2xl text-center">
           <i className="fas fa-trash fa-6x text-span-2"></i>
