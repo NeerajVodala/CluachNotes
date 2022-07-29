@@ -12,75 +12,67 @@ export const NotesCard = ({ Note, pathname }) => {
     });
   };
 
-  const archiveNote = () => {
-    (async () => {
-      try {
-        const { status, data } = await axios.post(
-          `/api/notes/archives/${Note._id}`,
-          {
-            Note,
-          },
-          { headers: { authorization: localStorage.getItem("token") } }
-        );
-        if (status === 201) {
-          notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
-        }
-      } catch (error) {
-        console.error(error);
+  const archiveNote = async () => {
+    try {
+      const { status, data } = await axios.post(
+        `/api/notes/archives/${Note._id}`,
+        {
+          Note,
+        },
+        { headers: { authorization: localStorage.getItem("token") } }
+      );
+      if (status === 201) {
+        notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
       }
-    })();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const unArchiveNote = () => {
-    (async () => {
-      try {
-        const { status, data } = await axios.post(
-          `/api/archives/restore/${Note._id}`,
-          {},
-          {
-            headers: { authorization: localStorage.getItem("token") },
-          }
-        );
-        if (status === 200) {
-          notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  };
-
-  const deleteArchivedNote = () => {
-    (async () => {
-      try {
-        const { status, data } = await axios.delete(
-          `/api/archives/delete/${Note._id}`,
-          {
-            headers: { authorization: localStorage.getItem("token") },
-          }
-        );
-        if (status === 200) {
-          notesDispatch({ type: "DELETE_ARCHIVE", payload: data.archives });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  };
-
-  const trashNote = () => {
-    (async () => {
-      try {
-        const { status, data } = await axios.delete(`/api/notes/${Note._id}`, {
+  const unArchiveNote = async () => {
+    try {
+      const { status, data } = await axios.post(
+        `/api/archives/restore/${Note._id}`,
+        {},
+        {
           headers: { authorization: localStorage.getItem("token") },
-        });
-        if (status === 200) {
-          notesDispatch({ type: "TRASH_NOTE", payload: { data, Note } });
         }
-      } catch (error) {
-        console.error(error);
+      );
+      if (status === 200) {
+        notesDispatch({ type: "ARCHIVE_NOTE", payload: data });
       }
-    })();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteArchivedNote = async () => {
+    try {
+      const { status, data } = await axios.delete(
+        `/api/archives/delete/${Note._id}`,
+        {
+          headers: { authorization: localStorage.getItem("token") },
+        }
+      );
+      if (status === 200) {
+        notesDispatch({ type: "DELETE_ARCHIVE", payload: data.archives });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const trashNote = async () => {
+    try {
+      const { status, data } = await axios.delete(`/api/notes/${Note._id}`, {
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      if (status === 200) {
+        notesDispatch({ type: "TRASH_NOTE", payload: { data, Note } });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const unTrashNote = async () => {
