@@ -1,7 +1,7 @@
 import "./TextEditor.css";
 import { useNote } from "../../contexts";
 import { ColorPalette, Priority, Labels } from "../NoteFeatures";
-import axios from "axios";
+import { addNote, updateNote } from "../../utils";
 
 export const TextEditor = () => {
   const { note, setNote, initialNote, notesDispatch } = useNote();
@@ -11,41 +11,11 @@ export const TextEditor = () => {
     setNote(initialNote);
   };
 
-  const addNote = async () => {
-    try {
-      const response = await axios.post(
-        "/api/notes",
-        { note },
-        { headers: { authorization: localStorage.getItem("token") } }
-      );
-      const { status, data } = response;
-      if (status === 201) {
-        notesDispatch({ type: "ADD_NOTE", payload: data.notes });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const updateNote = async () => {
-    try {
-      const response = await axios.post(
-        `/api/notes/${note._id}`,
-        { note },
-        { headers: { authorization: localStorage.getItem("token") } }
-      );
-      const { status, data } = response;
-      if (status === 201) {
-        notesDispatch({ type: "UPDATE_NOTE", payload: data.notes });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveHandler = (e) => {
+  const saveHandler = (e, note, notesDispatch) => {
     e.preventDefault();
-    note.isEdited ? updateNote() : addNote();
+    note.isEdited
+      ? updateNote(note, notesDispatch)
+      : addNote(note, notesDispatch);
     setNote(initialNote);
   };
 
@@ -56,7 +26,7 @@ export const TextEditor = () => {
   return (
     <form
       className="note-editor flex-col gp-m br-s"
-      onSubmit={(e) => saveHandler(e)}
+      onSubmit={(e) => saveHandler(e, note, notesDispatch)}
     >
       <div className="flex-row justify-between align-center gp-s">
         <input
