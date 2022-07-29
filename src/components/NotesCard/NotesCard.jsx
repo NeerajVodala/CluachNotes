@@ -60,7 +60,7 @@ export const NotesCard = ({ Note, pathname }) => {
             Priority: {Note.priority}
           </span>
         )}
-        {Note.label && Note.label !== "Select" && (
+        {Note.label && Note.label !== "Labels" && (
           <span className="text-s text-bold br-full note-card-chip">
             Label: {Note.label}
           </span>

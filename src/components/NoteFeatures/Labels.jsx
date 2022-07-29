@@ -15,7 +15,7 @@ export const Labels = () => {
           value={note.label}
           onChange={(e) => setNote({ ...note, label: e.target.value })}
         >
-          <option>Select</option>
+          <option>Labels</option>
           {labels.map((l) => (
             <option key={l}>{l}</option>
           ))}
