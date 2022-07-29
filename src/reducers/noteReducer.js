@@ -1,6 +1,5 @@
 const initialState = {
   notesList: [],
-  pinnedList: [],
   archivedList: [],
   trashedList: [],
 };
