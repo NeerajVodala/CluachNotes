@@ -1,18 +1,21 @@
 import "./TextEditor.css";
 import { useNote } from "../../contexts";
 import { ColorPalette, Priority, Labels } from "../NoteFeatures";
+import { addNote, updateNote } from "../../utils";
 
 export const TextEditor = () => {
-  const { notes, setNotes, note, setNote, initialNote } = useNote();
+  const { note, setNote, initialNote, notesDispatch } = useNote();
 
   const clearHandler = (e) => {
     e.preventDefault();
     setNote(initialNote);
   };
 
-  const saveHandler = (e) => {
+  const saveHandler = (e, note, notesDispatch) => {
     e.preventDefault();
-    setNotes([...notes, note]);
+    note.isEdited
+      ? updateNote(note, notesDispatch)
+      : addNote(note, notesDispatch);
     setNote(initialNote);
   };
 
@@ -23,7 +26,7 @@ export const TextEditor = () => {
   return (
     <form
       className="note-editor flex-col gp-m br-s"
-      onSubmit={(e) => saveHandler(e)}
+      onSubmit={(e) => saveHandler(e, note, notesDispatch)}
     >
       <div className="flex-row justify-between align-center gp-s">
         <input
