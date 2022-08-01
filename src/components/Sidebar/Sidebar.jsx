@@ -4,7 +4,7 @@ import { useNote } from "../../contexts";
 import "./Sidebar.css";
 
 export const Sidebar = () => {
-  const { labels, setLabels } = useNote();
+  const { labels, setLabels, sideBar } = useNote();
   const [labelText, setLabelText] = useState("");
   const labelsHandler = (e) => {
     e.preventDefault();
@@ -12,7 +12,10 @@ export const Sidebar = () => {
     setLabelText("");
   };
   return (
-    <aside className="sidebar">
+    <aside
+      className="sidebar"
+      style={sideBar ? { display: "block" } : { display: "none" }}
+    >
       <nav>
         <div>
           <p className="text-span-1 text-s text-semibold nav-heading">

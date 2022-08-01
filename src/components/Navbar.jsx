@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../contexts";
+import { useAuth, useNote } from "../contexts";
 
 export const Navbar = () => {
   const {
     authState: { isLoggedIn },
     setAuthState,
   } = useAuth();
+  const { setSideBar } = useNote();
   const { pathname } = useLocation();
 
   const [lightMode, setLightMode] = useState(
@@ -36,7 +37,7 @@ export const Navbar = () => {
   return (
     <header className="header">
       <div className="header-logo-section">
-        <div className="menu-icon">
+        <div className="menu-icon" onClick={() => setSideBar((prev) => !prev)}>
           <i className="fas fa-bars fa-lg"></i>
         </div>
         <Link to="/">
