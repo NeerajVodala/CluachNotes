@@ -17,7 +17,7 @@ const NoteProvider = ({ children }) => {
   const [note, setNote] = useState(initialNote);
   const [notesState, notesDispatch] = useReducer(notesReducer, initialState);
   const [labels, setLabels] = useState(["Todo", "Work", "Chore", "Shopping"]);
-  const [sideBar, setSideBar] = useState(false);
+  const [sideBar, setSideBar] = useState(true);
 
   return (
     <NoteContext.Provider
