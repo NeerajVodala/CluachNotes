@@ -13,7 +13,7 @@ export const ColorPalette = () => {
   ];
 
   const paletteHandler = () => {
-    console.log("yes");
+    // console.log("yes");
   };
 
   return (
